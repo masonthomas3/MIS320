@@ -30,6 +30,7 @@ def home(name=WEB_APP_NAME):
     return render_template("home.html", content=name)
 
 
+# TODO verify the data is correct, render an error template if data is entered incorrectly
 @app.route('/add_vehicle', methods=['POST'])
 def add_vehicle():
     print('Post Vehicle')

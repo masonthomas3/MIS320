@@ -30,7 +30,7 @@ def home(name=WEB_APP_NAME):
     return render_template("home.html", content=name)
 
 
-# TODO verify the data is correct, render an error template if data is entered incorrectly
+# TODO verify the data is correct, make it render an error template if data is entered incorrectly
 @app.route('/add_vehicle', methods=['POST'])
 def add_vehicle():
     print('Post Vehicle')
@@ -63,6 +63,23 @@ def add_driver():
 def add_driver_page():
     print('Got Driver')
     return render_template("add_driver.html")
+
+
+@app.route('/add_customer', methods=['POST'])
+def add_customer():
+    print('Post Customer')
+    customer_name = request.form['name']
+    phone_number = request.form['phone_number']
+    email = request.form['email']
+    address = request.form['address']
+    print(customer_name, phone_number, email, address)
+    return render_template("data_added.html", field="Customer")
+
+
+@app.route('/add_customer', methods=['GET'])
+def add_customer_page():
+    print('Got Customer')
+    return render_template("add_customer.html")
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8080)

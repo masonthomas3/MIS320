@@ -1,0 +1,14 @@
+{%extends "layout.html"%}
+{%block content%}
+  <h1>Add a new payment to the database</h1>
+  <h2>{{ content }}</h2>
+  <form action="/add_payment" method="POST">
+    <label>Payment Method ID:</label><input type="text" value="" name="payment_method_id"/>
+    <br/>
+    <label>Amount:</label><input type="text" value="" name="amount" />
+    <br/>
+    <label>Date:</label><input type="text" value="" name="date" />
+    <br/>
+    <input type="submit" value="Add Payment" />
+  </form>
+{%endblock%}

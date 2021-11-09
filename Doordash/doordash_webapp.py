@@ -98,5 +98,22 @@ def add_payment_method_page():
     print('Got Payment Method')
     return render_template("add_payment_method.html")
 
+
+@app.route('/add_payment', methods=['POST'])
+def add_payment():
+    print('Post Payment ')
+    payment_method_id = request.form['payment_method_id']
+    amount = request.form['amount']
+    date = request.form['date']
+    print(payment_method_id, amount, date)
+    return render_template("data_added.html", field="Payment")
+
+
+@app.route('/add_payment', methods=['GET'])
+def add_payment_page():
+    print('Got Payment')
+    return render_template("add_payment.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8080)

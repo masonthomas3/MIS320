@@ -115,5 +115,21 @@ def add_payment_page():
     return render_template("add_payment.html")
 
 
+@app.route('/add_order', methods=['POST'])
+def add_order():
+    print('Post Order ')
+    driver_ssn = request.form['driver_ssn']
+    customer_id = request.form['customer_id']
+    payment_id = request.form['payment_id']
+    print(driver_ssn, customer_id, payment_id)
+    return render_template("data_added.html", field="Order")
+
+
+@app.route('/add_order', methods=['GET'])
+def add_order_page():
+    print('Got Order')
+    return render_template("add_order.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8080)

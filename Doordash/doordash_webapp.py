@@ -1,25 +1,30 @@
 from flask import Flask, render_template, request
 import sqlite3
 
-# TODO abstract this so it is only ran once
-# sqlite_file = 'doordash_db.sqlite'
-# conn = sqlite3.connect(sqlite_file)
-# c = conn.cursor()
 
-# with open('testScript.sql', 'r') as sqlite_file:
-  #  sql_script = sqlite_file.read()
+def set_up_database():
+    sqlite_file = 'doordash_db.sqlite'
+    conn = sqlite3.connect(sqlite_file)
+    c = conn.cursor()
 
-# Inserts all tables used in database
-# c.executescript(sql_script)
+    with open('testScript.sql', 'r') as sqlite_file:
+        sql_script = sqlite_file.read()
+
+    # Inserts all tables used in database
+    c.executescript(sql_script)
+    c.execute("SELECT * FROM DRIVER")
+    print(c.fetchall(), 'asf')
+    c.close()
 
 # c.execute("SELECT * FROM DRIVER")
 # print(c.fetchall())
 # c.execute('INSERT INTO DRIVER VALUES (54896465, "Mason", 0.0, 0.0, 0, 0.0, 0, 20)')
 # c.execute("SELECT * FROM DRIVER")
 # print(c.fetchall(), "here")
-# c.close()
+
 
 app = Flask(__name__)
+
 
 WEB_APP_NAME = "MIS320"
 
@@ -210,4 +215,5 @@ def add_ordered_item_page():
 
 
 if __name__ == "__main__":
+    set_up_database()
     app.run(debug=True, host='0.0.0.0', port=8080)

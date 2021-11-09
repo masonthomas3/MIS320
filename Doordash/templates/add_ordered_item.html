@@ -1,0 +1,14 @@
+{%extends "layout.html"%}
+{%block content%}
+  <h1>Add a new ordered item to the database</h1>
+  <h2>{{ content }}</h2>
+  <form action="/add_ordered_item" method="POST">
+    <label>Menu Item ID:</label><input type="text" maxlength="5" size="5" value="" name="menu_item_id" />
+    <br/>
+    <label>Order_ID:</label><input type="text" maxlength="19" size="19" value="" name="order_id" />
+    <br/>
+    <label>Quantity:</label><input type="text" value="" name="quantity" />
+    <br/>
+    <input type="submit" value="Add Ordered Item" />
+  </form>
+{%endblock%}

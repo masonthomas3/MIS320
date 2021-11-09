@@ -131,5 +131,83 @@ def add_order_page():
     return render_template("add_order.html")
 
 
+@app.route('/add_driver_payment', methods=['POST'])
+def add_driver_payment():
+    print('Post Driver Payment')
+    driver_ssn = request.form['driver_ssn']
+    order_id = request.form['order_id']
+    base_pay = request.form['base_pay']
+    tip = request.form['tip']
+    print(driver_ssn, order_id, base_pay, tip)
+    return render_template("data_added.html", field="Driver Payment")
+
+
+@app.route('/add_driver_payment', methods=['GET'])
+def add_driver_payment_page():
+    print('Got Driver Payment')
+    return render_template("add_driver_payment.html")
+
+
+@app.route('/add_business', methods=['POST'])
+def add_business():
+    print('Post Business')
+    name = request.form['name']
+    location = request.form['location']
+    delivery_fee = request.form['delivery_fee']
+    print (name, location, delivery_fee)
+    return render_template("data_added.html", field="Business")
+
+
+@app.route('/add_business', methods=['GET'])
+def add_business_page():
+    print('Got Business')
+    return render_template("add_business.html")
+
+
+@app.route('/add_menu', methods=['POST'])
+def add_menu():
+    print('Post Menu')
+    business_id = request.form['business_id']
+    description = request.form['description']
+    name = request.form['name']
+    print(business_id, description, name)
+    return render_template("data_added.html", field="Menu")
+
+
+@app.route('/add_menu', methods=['GET'])
+def add_menu_page():
+    print('Got Menu')
+    return render_template("add_menu.html")
+
+
+@app.route('/add_menu_item', methods=['POST'])
+def add_menu_item():
+    print('Post Menu Item')
+    menu_id = request.form['menu_id']
+    name = request.form['name']
+    cost = request.form['cost']
+    print(menu_id, name, cost)
+    return render_template("data_added.html", field="Menu Item")
+
+
+@app.route('/add_menu_item', methods=['GET'])
+def add_menu_item_page():
+    print('Got Menu Item')
+    return render_template("add_menu_item.html")
+
+
+@app.route('/add_ordered_item', methods=['POST'])
+def add_ordered_item():
+    print('Post Ordered Item')
+
+    return render_template("data_added.html", field="Ordered Item")
+
+
+@app.route('/add_ordered_item', methods=['GET'])
+def add_ordered_item_page():
+    print('Got Ordered Item')
+    return render_template("add_ordered_item.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8080)

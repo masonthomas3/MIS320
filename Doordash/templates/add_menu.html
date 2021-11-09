@@ -1,0 +1,14 @@
+{%extends "layout.html"%}
+{%block content%}
+  <h1>Add a new menu to the database</h1>
+  <h2>{{ content }}</h2>
+  <form action="/add_menu" method="POST">
+    <label>Business ID:</label><input type="text" maxlength="5" size="5" value="" name="business_id" />
+    <br/>
+    <label>Description:</label><input type="text" value="" name="description" />
+    <br/>
+    <label>Name:</label><input type="text" value="" name="name" />
+    <br/>
+    <input type="submit" value="Add Menu" />
+  </form>
+{%endblock%}

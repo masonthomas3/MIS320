@@ -1,0 +1,16 @@
+{%extends "layout.html"%}
+{%block content%}
+  <h1>Add a new payment method to the database</h1>
+  <h2>{{ content }}</h2>
+  <form action="/add_payment_method" method="POST">
+    <label>Customer ID:</label><input type="text" value="" name="customer_id"/>
+    <br/>
+    <label>Card Number:</label><input type="password" value="" name="card_number" />
+    <br/>
+    <label>Expiration Date:</label><input type="text" value="" name="expiration_date" />
+    <br/>
+    <label>3 Digit Security Code:</label><input type="password" maxlength="3" size="3" value="" name="security_number" />
+    <br/>
+    <input type="submit" value="Add Payment Method" />
+  </form>
+{%endblock%}

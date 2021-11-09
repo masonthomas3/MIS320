@@ -81,5 +81,22 @@ def add_customer_page():
     print('Got Customer')
     return render_template("add_customer.html")
 
+
+@app.route('/add_payment_method', methods=['POST'])
+def add_payment_method():
+    print('Post Payment Method')
+    customer_id = request.form['customer_id']
+    card_number = request.form['card_number']
+    expiration_date = request.form['expiration_date']
+    security_number = request.form['security_number']
+    print(customer_id, card_number, expiration_date, security_number)
+    return render_template("data_added.html", field="Payment Method")
+
+
+@app.route('/add_payment_method', methods=['GET'])
+def add_payment_method_page():
+    print('Got Payment Method')
+    return render_template("add_payment_method.html")
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8080)

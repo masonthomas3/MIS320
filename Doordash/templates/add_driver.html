@@ -1,0 +1,14 @@
+{%extends "layout.html"%}
+{%block content%}
+  <h1>Login to the MIS407 Website</h1>
+  <h2>{{ content }}</h2>
+  <form action="/add_driver" method="POST">
+    <label>Driver SSN:</label><input type="password" value="" name="driver_ssn"/>
+    <br/>
+    <label>Name:</label><input type="text" value="" name="name" />
+    <br/>
+    <label>Age:</label><input type="text" value="" name="age" />
+    <br/>
+    <input type="submit" value="Add Driver" />
+  </form>
+{%endblock%}

@@ -3,11 +3,11 @@
   <h1>Add a new business to the database</h1>
   <h2>{{ content }}</h2>
   <form action="/add_business" method="POST">
-    <label>Name:</label><input type="text" value="" name="name" />
+    <label>Name:</label><input required type="text" value="" name="name" />
     <br/>
-    <label>Location:</label><input type="text" value="" name="location" />
+    <label>Location:</label><input required type="text" value="" name="location" />
     <br/>
-    <label>Delivery Fee:</label><input type="text" value="2.95" name="delivery_fee" />
+    <label>Delivery Fee:</label><input required type="text" value="2.95" name="delivery_fee" />
     <br/>
     <input type="submit" value="Add Business" />
   </form>

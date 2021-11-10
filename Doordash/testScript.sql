@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS "driver" (
 	"Name"	TEXT NOT NULL,
 	"Acceptance_Rate"	REAL NOT NULL DEFAULT 0.0,
 	"Completion_Rate"	REAL NOT NULL DEFAULT 0.0,
-	"Customer_Rating"	REAL NOT NULL,
-	"On_Time_Rate"	REAL NOT NULL,
+	"Customer_Rating"	REAL NOT NULL DEFAULT 0,
+	"On_Time_Rate"	REAL NOT NULL DEFAULT 0.0,
 	"Lifetime_Deliveries"	INTEGER NOT NULL DEFAULT 0,
 	"Age"	INTEGER NOT NULL,
 	PRIMARY KEY("Driver_SSN")
@@ -104,4 +104,14 @@ CREATE TABLE IF NOT EXISTS "payment" (
 	FOREIGN KEY("Payment_Method_ID") REFERENCES "payment_method"("Payment_Method_ID"),
 	PRIMARY KEY("Payment_ID" AUTOINCREMENT)
 );
+
+INSERT INTO customer (Name, Phone_Number, Email, Address)
+VALUES ("Mason Thomas", "515-291-6827", "mthomas3@iastate.edu", "812 Cove Dr. Ames, IA 50010");
+
+INSERT INTO customer (Name, Phone_Number, Email, Address)
+VALUES ("Jack Roger", "515-231-6882", "jroger@iastate.edu", "200 Ash Dr. Ames, IA 50010");
+
+INSERT INTO customer (Name, Phone_Number, Email, Address)
+VALUES ("Grant Stephens", "319-268-9128", "gstephens@iastate.edu", "381 Maple Ave. Ames, IA 50010");
+
 COMMIT;

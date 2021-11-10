@@ -3,13 +3,13 @@
   <h1>Add a new vehicle to the database</h1>
   <h2>{{ content }}</h2>
   <form action="/add_vehicle" method="POST">
-    <label>Driver SSN:</label><input type="password" maxlength="11" size="11" value="" name="driver_ssn"/>
+    <label>Driver SSN:</label><input required type="password" maxlength="11" size="11" value="" name="driver_ssn"/>
     <br/>
-    <label>Make:</label><input type="text" value="" name="make" />
+    <label>Make:</label><input required type="text" value="" name="make" />
     <br/>
-    <label>License Plate:</label><input type="text" maxlength="7" size="7" value="" name="license_plate" />
+    <label>License Plate:</label><input required type="text" maxlength="7" size="7" value="" name="license_plate" />
     <br/>
-    <label>Model:</label><input type="text" value="" name="model" />
+    <label>Model:</label><input required type="text" value="" name="model" />
     <br/>
     <input type="submit" value="Add Vehicle" />
   </form>

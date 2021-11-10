@@ -3,13 +3,13 @@
   <h1>Add a new driver payment to the database</h1>
   <h2>{{ content }}</h2>
   <form action="/add_driver_payment" method="POST">
-    <label>Driver SSN:</label><input type="password" maxlength="11" size="11" value="" name="driver_ssn"/>
+    <label>Driver SSN:</label><input required type="password" maxlength="11" size="11" value="" name="driver_ssn"/>
     <br/>
-    <label>Order ID:</label><input type="text" maxlength="5" size="5" value="" name="order_id" />
+    <label>Order ID:</label><input required type="text" maxlength="5" size="5" value="" name="order_id" />
     <br/>
-    <label>Base Pay:</label><input type="text" maxlength="6" size="6" value="" name="base_pay" />
+    <label>Base Pay:</label><input required type="text" maxlength="6" size="6" value="" name="base_pay" />
     <br/>
-    <label>Tip:</label><input type="text" maxlength="6" size="6" value="3.00" name="tip" />
+    <label>Tip:</label><input required type="text" maxlength="6" size="6" value="3.00" name="tip" />
     <br/>
     <input type="submit" value="Add Driver Payment" />
   </form>

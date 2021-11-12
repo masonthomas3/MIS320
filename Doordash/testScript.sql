@@ -20,15 +20,16 @@ CREATE TABLE IF NOT EXISTS "customer" (
 	"Address"	TEXT NOT NULL,
 	PRIMARY KEY("Customer_ID" AUTOINCREMENT)
 );
-DROP TABLE IF EXISTS "order";
-CREATE TABLE IF NOT EXISTS "order" (
+DROP TABLE IF EXISTS "doordash_order";
+CREATE TABLE IF NOT EXISTS "doordash_order" (
+	"Order_ID" INTEGER NOT NULL,
 	"Driver_SSN"	INTEGER NOT NULL,
 	"Customer_ID"	INTEGER NOT NULL,
 	"Payment_ID"	INTEGER NOT NULL,
 	FOREIGN KEY("Customer_ID") REFERENCES "customer"("Customer_ID"),
 	FOREIGN KEY("Driver_SSN") REFERENCES "driver"("Driver_SSN"),
 	FOREIGN KEY("Payment_ID") REFERENCES "payment"("Payment_ID"),
-	PRIMARY KEY("Driver_SSN","Customer_ID","Payment_ID")
+	PRIMARY KEY("Order_ID" AUTOINCREMENT)
 );
 DROP TABLE IF EXISTS "driver_payment";
 CREATE TABLE IF NOT EXISTS "driver_payment" (
@@ -36,7 +37,7 @@ CREATE TABLE IF NOT EXISTS "driver_payment" (
 	"Order_ID"	INTEGER NOT NULL,
 	"Base_Pay"	REAL NOT NULL DEFAULT 3.00,
 	"Tip"	REAL NOT NULL DEFAULT 0.00,
-	FOREIGN KEY("Order_ID") REFERENCES "order",
+	FOREIGN KEY("Order_ID") REFERENCES "doordash_order",
 	FOREIGN KEY("Driver_SSN") REFERENCES "driver"("Driver_SSN"),
 	PRIMARY KEY("Driver_SSN","Order_ID")
 );
@@ -72,7 +73,7 @@ CREATE TABLE IF NOT EXISTS "ordered_item" (
 	"Order_ID"	INTEGER NOT NULL,
 	"Quantity"	TEXT NOT NULL DEFAULT 1,
 	FOREIGN KEY("Menu_Item_ID") REFERENCES "menu_item"("Menu_Item_ID"),
-	FOREIGN KEY("Order_ID") REFERENCES "order",
+	FOREIGN KEY("Order_ID") REFERENCES "doordash_order",
 	PRIMARY KEY("Menu_Item_ID","Order_ID")
 );
 DROP TABLE IF EXISTS "vehicle";
@@ -105,13 +106,46 @@ CREATE TABLE IF NOT EXISTS "payment" (
 	PRIMARY KEY("Payment_ID" AUTOINCREMENT)
 );
 
-INSERT INTO customer (Name, Phone_Number, Email, Address)
-VALUES ("Mason Thomas", "515-291-6827", "mthomas3@iastate.edu", "812 Cove Dr. Ames, IA 50010");
+INSERT INTO customer (Customer_ID, Name, Phone_Number, Email, Address)
+VALUES (5124323421, "Mason Thomas", "515-291-6827", "mthomas3@iastate.edu", "812 Cove Dr. Ames, IA 50010");
 
 INSERT INTO customer (Name, Phone_Number, Email, Address)
 VALUES ("Jack Roger", "515-231-6882", "jroger@iastate.edu", "200 Ash Dr. Ames, IA 50010");
 
 INSERT INTO customer (Name, Phone_Number, Email, Address)
 VALUES ("Grant Stephens", "319-268-9128", "gstephens@iastate.edu", "381 Maple Ave. Ames, IA 50010");
+
+INSERT INTO driver (Driver_SSN, Name, Age)
+VALUES (234742743, "Ryan Lawrence", 23);
+
+INSERT INTO driver (Driver_SSN, Name, Age)
+VALUES (209372747, "Patrick Carter", 23);
+
+INSERT INTO business (Business_ID, Name, Location, Delivery_Fee)
+VALUES (6234542123, "McDonalds", "Ames, IA", 2.95);
+
+INSERT INTO menu (Menu_ID, Business_ID, Name, Description)
+VALUES (2347134101, 6234542123, "Lunch", "This is the lunch menu that runs from 11am to 4pm");
+
+INSERT INTO payment_method (Payment_Method_ID, Customer_ID, Card_Number, Expiration_Date, Security_Number)
+VALUES (8982123841, 5124323421, 1234567891234567, "02/22", 304);
+
+INSERT INTO payment (Payment_ID, Payment_Method_ID, Amount, Date)
+VALUES (8762384953, 8982123841, 13.50, "11-Nov-2021");
+
+INSERT INTO vehicle (Driver_SSN, Make, License_Plate, Model)
+VALUES (234742743, "Honda", "B4S KM9", "CRV");
+
+INSERT INTO menu_item (Menu_Item_ID, Menu_ID, Name, Cost)
+VALUES (2341234324, 2347134101, "McChicken", 1.00);
+
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (234742743, 5124323421, 8762384953);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (2341234324, 1, 2);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (234742743, 1, 3.50, 2.50);
 
 COMMIT;

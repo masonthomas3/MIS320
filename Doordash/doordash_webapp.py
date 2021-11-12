@@ -13,14 +13,41 @@ def set_up_database():
     # Inserts all tables used in database
     c.executescript(sql_script)
     c.execute("SELECT * FROM DRIVER")
-    print(c.fetchall(), 'asf')
-    c.close()
+    for row in c:
+        print(row)
+    c.execute("SELECT * FROM CUSTOMER")
+    for row in c:
+        print(row)
+    c.execute("SELECT * FROM doordash_order")
+    for row in c:
+        print(row)
+    c.execute("SELECT * FROM vehicle")
+    for row in c:
+        print(row)
+    c.execute("SELECT * FROM business")
+    for row in c:
+        print(row)
+    c.execute("SELECT * FROM driver_payment")
+    for row in c:
+        print(row)
+    c.execute("SELECT * FROM menu")
+    for row in c:
+        print(row)
+    c.execute("SELECT * FROM menu_item")
+    for row in c:
+        print(row)
+    c.execute("SELECT * FROM ordered_item")
+    for row in c:
+        print(row)
+    c.execute("SELECT * FROM payment")
+    for row in c:
+        print(row)
+    c.execute("SELECT * FROM payment_method")
+    for row in c:
+        print(row)
 
-# c.execute("SELECT * FROM DRIVER")
-# print(c.fetchall())
-# c.execute('INSERT INTO DRIVER VALUES (54896465, "Mason", 0.0, 0.0, 0, 0.0, 0, 20)')
-# c.execute("SELECT * FROM DRIVER")
-# print(c.fetchall(), "here")
+            # c.execute('INSERT INTO DRIVER VALUES (54896465, "Mason", 0.0, 0.0, 0, 0.0, 0, 20);')
+    c.close()
 
 
 app = Flask(__name__)

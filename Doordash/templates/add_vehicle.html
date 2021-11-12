@@ -3,7 +3,7 @@
   <h1>Add a new vehicle to the database</h1>
   <h2>{{ content }}</h2>
   <form action="/add_vehicle" method="POST">
-    <label>Driver SSN:</label><input required type="password" maxlength="11" size="11" value="" name="driver_ssn"/>
+    <label>Driver SSN (No dashes):</label><input required type="password" maxlength="9" size="9" value="" name="driver_ssn"/>
     <br/>
     <label>Make:</label><input required type="text" value="" name="make" />
     <br/>

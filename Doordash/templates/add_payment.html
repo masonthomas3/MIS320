@@ -3,11 +3,11 @@
   <h1>Add a new payment to the database</h1>
   <h2>{{ content }}</h2>
   <form action="/add_payment" method="POST">
-    <label>Payment Method ID:</label><input type="text" maxlength="5" size="5" value="" name="payment_method_id"/>
+    <label>Payment Method ID:</label><input required type="text" maxlength="5" size="5" value="" name="payment_method_id"/>
     <br/>
-    <label>Amount:</label><input type="text" maxlength="6" size="6" value="" name="amount" />
+    <label>Amount:</label><input required type="text" maxlength="6" size="6" value="" name="amount" />
     <br/>
-    <label>Date:</label><input type="text" value="" name="date" />
+    <label>Date (YYYY-MM-DD):</label><input required type="text" maxlength="10" size="10" value="" name="date" />
     <br/>
     <input type="submit" value="Add Payment" />
   </form>

@@ -1,0 +1,14 @@
+{%extends "layout.html"%}
+{%block content%}
+  <h1>Add a new order to the database</h1>
+  <h2>{{ content }}</h2>
+  <form action="/add_order" method="POST">
+    <label>Driver SSN (No dashes):</label><input required type="password" maxlength="9" size="9" value="" name="driver_ssn"/>
+    <br/>
+    <label>Customer ID:</label><input required type="text" maxlength="5" size="5" value="" name="customer_id" />
+    <br/>
+    <label>Payment ID:</label><input required type="text" maxlength="5" size="5" value="" name="payment_id" />
+    <br/>
+    <input type="submit" value="Add Order" />
+  </form>
+{%endblock%}

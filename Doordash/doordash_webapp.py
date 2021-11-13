@@ -72,14 +72,17 @@ def add_vehicle():
     conn = sqlite3.connect(sqlite_file)
     c = conn.cursor()
 
-    if len(driver_ssn) == 9 and make.isalpha() and 4 <= len(license_plate) <= 7:
-        c.execute('INSERT INTO VEHICLE (Driver_SSN, Make, License_Plate, Model) '
-                  'VALUES (?,?,?,?)', (driver_ssn, make, license_plate, model))
-        c.execute('COMMIT')
-        c.execute('SELECT * FROM vehicle')
-        for row in c:
-            print(row)
-        return render_template("data_added.html", field="Vehicle")
+    c.execute('SELECT Driver_SSN FROM driver where Driver_SSN = {pk}'.format(pk=driver_ssn))
+    row = c.fetchone()
+    if row is None:
+        if len(driver_ssn) == 9 and make.isalpha() and 4 <= len(license_plate) <= 7:
+            c.execute('INSERT INTO VEHICLE (Driver_SSN, Make, License_Plate, Model) '
+                      'VALUES (?,?,?,?)', (driver_ssn, make, license_plate, model))
+            c.execute('COMMIT')
+            c.execute('SELECT * FROM vehicle')
+            for row in c:
+                print(row)
+            return render_template("data_added.html", field="Vehicle")
     return render_template("data_invalid.html", field="Vehicle")
 
 
@@ -97,6 +100,7 @@ def add_driver():
     driver_ssn = request.form['driver_ssn']
     name = request.form['name']
     age = request.form['age']
+
     if len(driver_ssn) == 9 and name.isalpha() and 2 <= len(age) <= 3:
         c.execute('INSERT INTO driver (Driver_SSN, Name, Age) '
                   'VALUES (?,?,?)', (driver_ssn, name, age))
@@ -151,15 +155,18 @@ def add_payment_method():
     expiration_date = request.form['expiration_date']
     security_number = request.form['security_number']
 
-    if customer_id.isnumeric() and card_number.isnumeric() and (len(expiration_date) == 4 or len(expiration_date) == 5)\
-            and security_number.isnumeric() and len(security_number) == 3:
-        c.execute('INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number) '
-                  'VALUES (?,?,?,?)', (customer_id, card_number, expiration_date, security_number))
-        c.execute('COMMIT')
-        c.execute('SELECT * FROM payment_method')
-        for row in c:
-            print(row)
-        return render_template("data_added.html", field="Payment Method")
+    c.execute('SELECT Customer_ID FROM customer where Customer_ID = {pk}'.format(pk=customer_id))
+    row = c.fetchone()
+    if row is None:
+        if customer_id.isnumeric() and card_number.isnumeric() and (len(expiration_date) == 4 or len(expiration_date) == 5)\
+                and security_number.isnumeric() and len(security_number) == 3:
+            c.execute('INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number) '
+                      'VALUES (?,?,?,?)', (customer_id, card_number, expiration_date, security_number))
+            c.execute('COMMIT')
+            c.execute('SELECT * FROM payment_method')
+            for row in c:
+                print(row)
+            return render_template("data_added.html", field="Payment Method")
     return render_template("data_invalid.html", field="Payment Method")
 
 
@@ -178,14 +185,17 @@ def add_payment():
     amount = request.form['amount']
     date = request.form['date']
 
-    if payment_method_id.isnumeric() and amount.isnumeric() and len(date) == 10:
-        c.execute('INSERT INTO payment (Payment_Method_ID, Amount, Date) '
-                  'VALUES (?,?,?)', (payment_method_id, amount, date))
-        c.execute('COMMIT')
-        c.execute('SELECT * FROM payment')
-        for row in c:
-            print(row)
-        return render_template("data_added.html", field="Payment")
+    c.execute('SELECT payment_method_id FROM payment_method where payment_method_id = {pk}'.format(pk=payment_method_id))
+    row = c.fetchone()
+    if row is None:
+        if payment_method_id.isnumeric() and amount.isnumeric() and len(date) == 10:
+            c.execute('INSERT INTO payment (Payment_Method_ID, Amount, Date) '
+                      'VALUES (?,?,?)', (payment_method_id, amount, date))
+            c.execute('COMMIT')
+            c.execute('SELECT * FROM payment')
+            for row in c:
+                print(row)
+            return render_template("data_added.html", field="Payment")
     return render_template("data_invalid.html", field="Payment")
 
 
@@ -204,14 +214,22 @@ def add_order():
     customer_id = request.form['customer_id']
     payment_id = request.form['payment_id']
 
-    if driver_ssn.isnumeric() and len(driver_ssn) == 9 and customer_id.isnumeric() and payment_id.isnumeric():
-        c.execute('INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID) '
-                  'VALUES (?,?,?)', (driver_ssn, customer_id, payment_id))
-        c.execute('COMMIT')
-        c.execute('SELECT * FROM doordash_order')
-        for row in c:
-            print(row)
-        return render_template("data_added.html", field="Order")
+    c.execute('SELECT Driver_SSN FROM driver where Driver_SSN = {pk}'.format(pk=driver_ssn))
+    driver_row = c.fetchone()
+    c.execute('SELECT Customer_ID FROM customer where Customer_ID = {pk}'.format(pk=customer_id))
+    customer_row = c.fetchone()
+    c.execute('SELECT Payment_ID FROM payment where Payment_ID = {pk}'.format(pk=payment_id))
+    payment_row = c.fetchone()
+
+    if driver_row is None and customer_row is None and payment_row is None:
+        if driver_ssn.isnumeric() and len(driver_ssn) == 9 and customer_id.isnumeric() and payment_id.isnumeric():
+            c.execute('INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID) '
+                      'VALUES (?,?,?)', (driver_ssn, customer_id, payment_id))
+            c.execute('COMMIT')
+            c.execute('SELECT * FROM doordash_order')
+            for row in c:
+                print(row)
+            return render_template("data_added.html", field="Order")
     return render_template("data_invalid.html", field="Order")
 
 
@@ -231,15 +249,22 @@ def add_driver_payment():
     base_pay = request.form['base_pay']
     tip = request.form['tip']
 
-    if driver_ssn.isnumeric() and len(driver_ssn) == 9 and order_id.isnumeric() \
-            and base_pay.isnumeric() and tip.isnumeric():
-        c.execute('INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip) '
-                  'VALUES (?,?,?, ?)', (driver_ssn, order_id, base_pay, tip))
-        c.execute('COMMIT')
-        c.execute('SELECT * FROM driver_payment')
-        for row in c:
-            print(row)
-        return render_template("data_added.html", field="Driver Payment")
+    c.execute('SELECT Driver_SSN FROM driver WHERE Driver_SSN = {pk}'.format(pk=driver_ssn))
+    driver_row = c.fetchone()
+
+    c.execute('SELECT Order_ID FROM order WHERE Order_ID = {pk}'.format(pk=order_id))
+    order_row = c.fetchone()
+
+    if driver_row is None and order_row is None:
+        if driver_ssn.isnumeric() and len(driver_ssn) == 9 and order_id.isnumeric() \
+                and base_pay.isnumeric() and tip.isnumeric():
+            c.execute('INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip) '
+                      'VALUES (?,?,?, ?)', (driver_ssn, order_id, base_pay, tip))
+            c.execute('COMMIT')
+            c.execute('SELECT * FROM driver_payment')
+            for row in c:
+                print(row)
+            return render_template("data_added.html", field="Driver Payment")
     return render_template("data_invalid.html", field="Driver Payment")
 
 
@@ -284,14 +309,17 @@ def add_menu():
     description = request.form['description']
     name = request.form['name']
 
-    if business_id.isnumeric():
-        c.execute('INSERT INTO business (Business_ID, Description, Name) '
-                  'VALUES (?,?,?)', (business_id, description, name))
-        c.execute('COMMIT')
-        c.execute('SELECT * FROM business')
-        for row in c:
-            print(row)
-        return render_template("data_added.html", field="Business")
+    c.execute('SELECT Business_ID FROM business WHERE Business_ID = {pk}'.format(pk=business_id))
+    row = c.fetchone()
+    if row is None:
+        if business_id.isnumeric():
+            c.execute('INSERT INTO business (Business_ID, Description, Name) '
+                      'VALUES (?,?,?)', (business_id, description, name))
+            c.execute('COMMIT')
+            c.execute('SELECT * FROM business')
+            for row in c:
+                print(row)
+            return render_template("data_added.html", field="Business")
     return render_template("data_invalid.html", field="Business")
 
 
@@ -310,14 +338,17 @@ def add_menu_item():
     name = request.form['name']
     cost = request.form['cost']
 
-    if menu_id.isnumeric() and name.isalpha() and cost.isnumeric():
-        c.execute('INSERT INTO menu_item (Menu_ID, Name, Cost) '
-                  'VALUES (?,?,?)', (menu_id, name, cost))
-        c.execute('COMMIT')
-        c.execute('SELECT * FROM menu_item')
-        for row in c:
-            print(row)
-        return render_template("data_added.html", field="Menu Item")
+    c.execute('SELECT Menu_ID FROM menu WHERE Menu_ID = {pk}'.format(pk=menu_id))
+    row = c.fetchone()
+    if row is None:
+        if menu_id.isnumeric() and name.isalpha() and cost.isnumeric():
+            c.execute('INSERT INTO menu_item (Menu_ID, Name, Cost) '
+                      'VALUES (?,?,?)', (menu_id, name, cost))
+            c.execute('COMMIT')
+            c.execute('SELECT * FROM menu_item')
+            for row in c:
+                print(row)
+            return render_template("data_added.html", field="Menu Item")
     return render_template("data_invalid.html", field="Menu Item")
 
 
@@ -336,14 +367,17 @@ def add_ordered_item():
     order_id = request.form['order_id']
     quantity = request.form['quantity']
 
-    if menu_item_id.isnumeric() and order_id.isnumeric() and quantity.isnumeric():
-        c.execute('INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity) '
-                  'VALUES (?,?,?)', (menu_item_id, order_id, quantity))
-        c.execute('COMMIT')
-        c.execute('SELECT * FROM ordered_item')
-        for row in c:
-            print(row)
-        return render_template("data_added.html", field="Ordered Item")
+    c.execute('SELECT Menu_Item_ID FROM menu_item WHERE Menu_Item_ID = {pk}'.format(pk=menu_item_id))
+    row = c.fetchone()
+    if row is None:
+        if menu_item_id.isnumeric() and order_id.isnumeric() and quantity.isnumeric():
+            c.execute('INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity) '
+                      'VALUES (?,?,?)', (menu_item_id, order_id, quantity))
+            c.execute('COMMIT')
+            c.execute('SELECT * FROM ordered_item')
+            for row in c:
+                print(row)
+            return render_template("data_added.html", field="Ordered Item")
     return render_template("data_invalid.html", field="Ordered Item")
 
 

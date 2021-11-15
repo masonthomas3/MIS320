@@ -81,8 +81,8 @@ CREATE TABLE IF NOT EXISTS "vehicle" (
 	"Vehicle_ID"	INTEGER NOT NULL,
 	"Driver_SSN"	INTEGER NOT NULL,
 	"Make"	TEXT NOT NULL,
-	"License_Plate"	TEXT NOT NULL,
 	"Model"	TEXT NOT NULL,
+	"License_Plate"	TEXT NOT NULL,
 	FOREIGN KEY("Driver_SSN") REFERENCES "driver"("Driver_SSN"),
 	PRIMARY KEY("Vehicle_ID" AUTOINCREMENT)
 );
@@ -202,52 +202,214 @@ VALUES ("Buffalo Wild Wings", "Ames, IA", 4.25);
 INSERT INTO menu (Menu_ID, Business_ID, Name, Description)
 VALUES (45000, 40000, "Lunch", "This is the lunch menu that runs from 11am to 4pm");
 
+--01
 INSERT INTO menu (Business_ID, Name, Description)
 VALUES (40000, "Breakfast", "This is the breakfast menu that runs from 8am to 11am");
 
+--02
 INSERT INTO menu (Business_ID, Name, Description)
 VALUES (40001, "Lunch", "This is the lunch menu that runs from 11am to 2pm");
 
+--03
 INSERT INTO menu (Business_ID, Name, Description)
 VALUES (40001, "Dinner", "This is the dinner menu that runs from 2pm to 9pm");
 
+--04
 INSERT INTO menu (Business_ID, Name, Description)
 VALUES (40002, "All Day", "This is the menu that runs all day");
 
+--05
 INSERT INTO menu (Business_ID, Name, Description)
 VALUES (40003, "Ice Cream Menu", "This is the ice cream menu that runs all day");
 
+--06
 INSERT INTO menu (Business_ID, Name, Description)
 VALUES (40004, "Lunch", "This is the lunch menu that runs from 10am to 3pm");
 
+--07
 INSERT INTO menu (Business_ID, Name, Description)
 VALUES (40005, "Dessert", "This is the dessert menu that runs from 2pm to 10pm");
 
+--08
 INSERT INTO menu (Business_ID, Name, Description)
 VALUES (40006, "Breakfast", "This is the breakfast menu that runs all day");
 
+--09
 INSERT INTO menu (Business_ID, Name, Description)
 VALUES (40007, "Lunch", "This is the lunch menu that runs from 10am to close");
 
+--10
 INSERT INTO menu (Business_ID, Name, Description)
 VALUES (40008, "Ice Cream", "This is the ice cream menu that runs all day");
 
+--11
 INSERT INTO menu (Business_ID, Name, Description)
 VALUES (40009, "Dinner", "This is the dinner menu that runs from 4pm to midnight");
-
 
 
 INSERT INTO payment_method (Payment_Method_ID, Customer_ID, Card_Number, Expiration_Date, Security_Number)
 VALUES (25000, 15000, 1234567891234567, "02/22", 304);
 
+--01
+INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
+VALUES (15000, 8738293847192384, "09/25", 928);
+
+--02
+INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
+VALUES (15001, 7634749509123847, "12/21", 721);
+
+--03
+INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
+VALUES (15002, 1232398768894736, "10/22", 834);
+
+--04
+INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
+VALUES (15003, 7434829039212345, "04/23", 314);
+
+--05
+INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
+VALUES (15004, 5462816232389430, "01/24", 412);
+
+--06
+INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
+VALUES (15005, 8372912389123740, "06/25", 342);
+
+--07
+INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
+VALUES (15006, 9431074127401284, "12/23", 841);
+
+--08
+INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
+VALUES (15007, 5203850385038502, "02/23", 842);
+
+--09
+INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
+VALUES (15008, 5802854012840128, "01/27", 311);
+
+--10
+INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
+VALUES (15009, 4081248024810840, "02/24", 283);
+
 INSERT INTO payment (Payment_ID, Payment_Method_ID, Amount, Date)
 VALUES (30000, 25000, 13.50, "11-Nov-2021");
 
+--01
+INSERT INTO payment (Payment_Method_ID, Amount, Date)
+VALUES (25000, 22.75, "15-Nov-2021");
+
+--02
+INSERT INTO payment (Payment_Method_ID, Amount, Date)
+VALUES (25001, 17.75, "12-Oct-2021");
+
+--03
+INSERT INTO payment (Payment_Method_ID, Amount, Date)
+VALUES (25002, 33.81, "30-Oct-2021");
+
+--04
+INSERT INTO payment (Payment_Method_ID, Amount, Date)
+VALUES (25003, 21.23, "30-Sep-2021");
+
+--05
+INSERT INTO payment (Payment_Method_ID, Amount, Date)
+VALUES (25004, 12.11, "22-Oct-2021");
+
+--06
+INSERT INTO payment (Payment_Method_ID, Amount, Date)
+VALUES (25005, 42.21, "21-Aug-2021");
+
+--07
+INSERT INTO payment (Payment_Method_ID, Amount, Date)
+VALUES (25006, 08.50, "30-Mar-2021");
+
+--08
+INSERT INTO payment (Payment_Method_ID, Amount, Date)
+VALUES (25007, 26.72, "04-Nov-2021");
+
+--09
+INSERT INTO payment (Payment_Method_ID, Amount, Date)
+VALUES (25008, 80.31, "10-Nov-2021");
+
+--10
+INSERT INTO payment (Payment_Method_ID, Amount, Date)
+VALUES (25009, 10.90, "01-Nov-2021");
+
+--11
+INSERT INTO payment (Payment_Method_ID, Amount, Date)
+VALUES (25010, 22.22, "04-Oct-2021");
+
 INSERT INTO vehicle (Vehicle_ID, Driver_SSN, Make, License_Plate, Model)
-VALUES (15000, 234742743, "Honda", "B4SKM9", "CRV");
+VALUES (15000, 234742743, "Honda", "CRV", "B4SKM9");
+
+INSERT INTO vehicle (Driver_SSN, Make, Model, License_Plate)
+VALUES (209372747, "Ford", "Fusion", "HYW062");
+
+INSERT INTO vehicle (Driver_SSN, Make, Model, License_Plate)
+VALUES (982735476, "Toyota", "Camry", "XYZ438");
+
+INSERT INTO vehicle (Driver_SSN, Make, Model, License_Plate)
+VALUES (453728938, "Subaru", "Outback", "OAS812");
+
+INSERT INTO vehicle (Driver_SSN, Make, Model, License_Plate)
+VALUES (837263748, "BMW", "I8", "KAS012");
+
+INSERT INTO vehicle (Driver_SSN, Make, Model, License_Plate)
+VALUES (872635419, "Toyota", "Tacoma", "MAS921");
+
+INSERT INTO vehicle (Driver_SSN, Make, Model, License_Plate)
+VALUES (871627384, "Buick", "Century", "ERA763");
+
+INSERT INTO vehicle (Driver_SSN, Make, Model, License_Plate)
+VALUES (653819732, "Buick", "Park Avenue", "URS843");
+
+INSERT INTO vehicle (Driver_SSN, Make, Model, License_Plate)
+VALUES (281374921, "Chevy", "Silverado", "HFE453");
 
 INSERT INTO menu_item (Menu_Item_ID, Menu_ID, Name, Cost)
 VALUES (50000, 45000, "McChicken", 1.00);
+
+--01
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45000, "McFlurry", 2.05);
+
+--02
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45001, "Egg McMuffin", 3.50);
+
+--03
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45001, "McGriddle", 3.39);
+
+--04
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45002, "Chicken Nuggets (8 piece)", 4.50);
+
+--05
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45002, "Chicken Sandwich Meal", 7.95);
+
+--06
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45003, "Small M&M Blizzard", 3.30);
+
+--07
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45003, "Medium M&M Blizzard", 4.30);
+
+--08
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45003, "Large M&M Blizzard", 5.30);
+
+--09
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45004, "Cheeseburger Meal", 6.69);
+
+--10
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45005, "Small Chocolate Milkshake", 3.19);
+
+--11
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45005, "Medium Chocolate Milkshake", 4.19);
 
 INSERT INTO doordash_order (Order_ID, Driver_SSN, Customer_ID, Payment_ID)
 VALUES (35000, 234742743, 15000, 30000);

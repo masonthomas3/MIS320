@@ -60,7 +60,6 @@ def home(name=WEB_APP_NAME):
     return render_template("home.html", content=name)
 
 
-# TODO verify the data is correct, make it render an error template if data is entered incorrectly
 @app.route('/add_vehicle', methods=['POST'])
 def add_vehicle():
     driver_ssn = request.form['driver_ssn']
@@ -80,8 +79,6 @@ def add_vehicle():
                       'VALUES (?,?,?,?)', (driver_ssn, make, license_plate, model))
             c.execute('COMMIT')
             c.execute('SELECT * FROM vehicle')
-            for row in c:
-                print(row)
             return render_template("data_added.html", field="Vehicle")
     return render_template("data_invalid.html", field="Vehicle")
 

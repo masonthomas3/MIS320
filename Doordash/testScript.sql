@@ -101,13 +101,13 @@ CREATE TABLE IF NOT EXISTS "payment" (
 	"Payment_ID"	INTEGER NOT NULL,
 	"Payment_Method_ID"	INTEGER NOT NULL,
 	"Amount"	REAL NOT NULL DEFAULT 0.00,
-	"Date"	TEXT NOT NULL,
+	"Payment_Date"	TEXT NOT NULL,
 	FOREIGN KEY("Payment_Method_ID") REFERENCES "payment_method"("Payment_Method_ID"),
 	PRIMARY KEY("Payment_ID" AUTOINCREMENT)
 );
 
 INSERT INTO customer (Customer_ID, Name, Phone_Number, Email, Address)
-VALUES (15000, "Mason Thomas", "5152916827", "mthomas3@iastate.edu", "812 Cove Dr. Ames, IA");
+VALUES (20000, "Brian Clubine", "5152316827", "bclubine@iastate.edu", "812 Cove Dr. Ames, IA");
 
 INSERT INTO customer (Name, Phone_Number, Email, Address)
 VALUES ("Jack Roger", "5152316882", "jroger@iastate.edu", "200 Ash Dr. Ames, IA");
@@ -248,94 +248,98 @@ VALUES (40009, "Dinner", "This is the dinner menu that runs from 4pm to midnight
 
 
 INSERT INTO payment_method (Payment_Method_ID, Customer_ID, Card_Number, Expiration_Date, Security_Number)
-VALUES (25000, 15000, 1234567891234567, "02/22", 304);
+VALUES (25000, 20000, 1234567891234567, "02/22", 304);
 
 --01
 INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
-VALUES (15000, 8738293847192384, "09/25", 928);
+VALUES (20001, 8738293847192384, "09/25", 928);
 
 --02
 INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
-VALUES (15001, 7634749509123847, "12/21", 721);
+VALUES (20001, 7634749509123847, "12/21", 721);
 
 --03
 INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
-VALUES (15002, 1232398768894736, "10/22", 834);
+VALUES (20002, 1232398768894736, "10/22", 834);
 
 --04
 INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
-VALUES (15003, 7434829039212345, "04/23", 314);
+VALUES (20003, 7434829039212345, "04/23", 314);
 
 --05
 INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
-VALUES (15004, 5462816232389430, "01/24", 412);
+VALUES (20004, 5462816232389430, "01/24", 412);
 
 --06
 INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
-VALUES (15005, 8372912389123740, "06/25", 342);
+VALUES (20005, 8372912389123740, "06/25", 342);
 
 --07
 INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
-VALUES (15006, 9431074127401284, "12/23", 841);
+VALUES (20006, 9431074127401284, "12/23", 841);
 
 --08
 INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
-VALUES (15007, 5203850385038502, "02/23", 842);
+VALUES (20007, 5203850385038502, "02/23", 842);
 
 --09
 INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
-VALUES (15008, 5802854012840128, "01/27", 311);
+VALUES (20008, 5802854012840128, "01/27", 311);
 
 --10
 INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number)
-VALUES (15009, 4081248024810840, "02/24", 283);
+VALUES (20009, 4081248024810840, "02/24", 283);
 
-INSERT INTO payment (Payment_ID, Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_ID, Payment_Method_ID, Amount, Payment_Date)
 VALUES (30000, 25000, 13.50, "11-Nov-2021");
 
 --01
-INSERT INTO payment (Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25000, 22.75, "15-Nov-2021");
 
 --02
-INSERT INTO payment (Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25001, 17.75, "12-Oct-2021");
 
 --03
-INSERT INTO payment (Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25002, 33.81, "30-Oct-2021");
 
 --04
-INSERT INTO payment (Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25003, 21.23, "30-Sep-2021");
 
 --05
-INSERT INTO payment (Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25004, 12.11, "22-Oct-2021");
 
 --06
-INSERT INTO payment (Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25005, 42.21, "21-Aug-2021");
 
 --07
-INSERT INTO payment (Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25006, 08.50, "30-Mar-2021");
 
 --08
-INSERT INTO payment (Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25007, 26.72, "04-Nov-2021");
 
 --09
-INSERT INTO payment (Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25008, 80.31, "10-Nov-2021");
 
 --10
-INSERT INTO payment (Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25009, 10.90, "01-Nov-2021");
 
 --11
-INSERT INTO payment (Payment_Method_ID, Amount, Date)
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25010, 22.22, "04-Oct-2021");
+
+--12
+INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
+VALUES (25010, 19.87, "04-Nov-2021");
 
 INSERT INTO vehicle (Vehicle_ID, Driver_SSN, Make, License_Plate, Model)
 VALUES (15000, 234742743, "Honda", "CRV", "B4SKM9");
@@ -389,35 +393,245 @@ VALUES (45002, "Chicken Sandwich Meal", 7.95);
 
 --06
 INSERT INTO menu_item (Menu_ID, Name, Cost)
-VALUES (45003, "Small M&M Blizzard", 3.30);
+VALUES (45003, "Chicken Sandwich Meal", 7.95);
 
 --07
 INSERT INTO menu_item (Menu_ID, Name, Cost)
-VALUES (45003, "Medium M&M Blizzard", 4.30);
+VALUES (45004, "Small M&M Blizzard", 3.30);
 
 --08
 INSERT INTO menu_item (Menu_ID, Name, Cost)
-VALUES (45003, "Large M&M Blizzard", 5.30);
+VALUES (45004, "Medium M&M Blizzard", 4.30);
 
 --09
 INSERT INTO menu_item (Menu_ID, Name, Cost)
-VALUES (45004, "Cheeseburger Meal", 6.69);
+VALUES (45004, "Large M&M Blizzard", 5.30);
 
 --10
 INSERT INTO menu_item (Menu_ID, Name, Cost)
-VALUES (45005, "Small Chocolate Milkshake", 3.19);
+VALUES (45004, "Cheeseburger Meal", 6.69);
 
 --11
 INSERT INTO menu_item (Menu_ID, Name, Cost)
-VALUES (45005, "Medium Chocolate Milkshake", 4.19);
+VALUES (45005, "Small Chocolate Concrete Mixer", 3.19);
+
+--12
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45005, "Medium Chocolate Concrete Mixer", 4.19);
+
+--13
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45006, "Whopper Meal", 8.80);
+
+--14
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45006, "Chicken Fries", 2.00);
+
+--15
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45007, "Chocolate Milkshake", 4.00);
+
+--16
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45007, "Lava Cake", 4.50);
+
+--17
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45008, "Buttermilk Pancake Short Stack", 7.99);
+
+--18
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45008, "Belgian Waffle Platter", 13.19);
+
+--19
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45009, "McChicken", 2.00);
+
+--20
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45010, "Like It Chocolate Devotion", 7.79);
+
+--21
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45010, "Love It Chocolate Devotion", 8.49);
+
+--22
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45010, "Gotta Have It Chocolate Devotion", 10.39);
+
+--23
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45011, "6 Boneless Wings", 8.99);
+
+--24
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45011, "10 Boneless Wings", 12.49);
+
+--25
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45011, "15 Boneless Wings", 17.79);
+
+--26
+INSERT INTO menu_item (Menu_ID, Name, Cost)
+VALUES (45011, "20 Boneless Wings", 21.99);
 
 INSERT INTO doordash_order (Order_ID, Driver_SSN, Customer_ID, Payment_ID)
-VALUES (35000, 234742743, 15000, 30000);
+VALUES (35000, 234742743, 20000, 30000);
+
+--01
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (234742743, 20000, 30001);
+
+--02
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (209372747, 20000, 30002);
+
+--03
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (982735476, 20001, 30003);
+
+--04
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (453728938, 20002, 30004);
+
+--05
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (837263748, 20003, 30005);
+
+--06
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (872635419, 20004, 30006);
+
+--07
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (871627384, 20005, 30007);
+
+--08
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (871627384, 20006, 30008);
+
+--09
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (653819732, 20007, 30009);
+
+--10
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (281374921, 20008, 30010);
+
+--11
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (281374921, 20009, 30011);
+
+--12
+INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID)
+VALUES (281374921, 20009, 30012);
 
 INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
 VALUES (50000, 35000, 2);
 
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50001, 35000, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50002, 35001, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50003, 35001, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50004, 35002, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50005, 35002, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50006, 35003, 2);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50007, 35004, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50008, 35004, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50009, 35004, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50010, 35005, 3);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50011, 35006, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50012, 35006, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50013, 35007, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50014, 35007, 3);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50015, 35008, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50016, 35008, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50017, 35009, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50018, 35009, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50019, 35010, 4);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50022, 35011, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50024, 35012, 1);
+
+INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
+VALUES (50026, 35012, 1);
+
 INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
-VALUES (23474, 35000, 3.50, 2.50);
+VALUES (234742743, 35000, 3.50, 2.50);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (234742743, 35001, 4.00, 2.50);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (209372747, 35002, 4.25, 2.50);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (982735476, 35003, 3.00, 4.00);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (453728938, 35004, 3.00, 2.00);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (837263748, 35005, 5.00, 5.00);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (872635419, 35006, 5.00, 0.00);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (871627384, 35007, 8.00, 1.00);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (871627384, 35008, 2.00, 5.00);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (653819732, 35009, 4.00, 5.00);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (281374921, 35010, 2.00, 4.00);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (281374921, 35011, 5.00, 4.00);
+
+INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip)
+VALUES (281374921, 35012, 5.00, 5.00);
 
 COMMIT;

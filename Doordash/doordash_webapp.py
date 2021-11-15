@@ -12,40 +12,40 @@ def set_up_database():
 
     # Inserts all tables used in database
     c.executescript(sql_script)
-    c.execute("SELECT * FROM DRIVER")
-    for row in c:
-        print(row)
-    c.execute("SELECT * FROM CUSTOMER")
-    for row in c:
-        print(row)
-    c.execute("SELECT * FROM doordash_order")
-    for row in c:
-        print(row)
-    c.execute("SELECT * FROM vehicle")
-    for row in c:
-        print(row)
-    c.execute("SELECT * FROM business")
-    for row in c:
-        print(row)
-    c.execute("SELECT * FROM driver_payment")
-    for row in c:
-        print(row)
-    c.execute("SELECT * FROM menu")
-    for row in c:
-        print(row)
-    c.execute("SELECT * FROM menu_item")
-    for row in c:
-        print(row)
-    c.execute("SELECT * FROM ordered_item")
-    for row in c:
-        print(row)
-    c.execute("SELECT * FROM payment")
-    for row in c:
-        print(row)
-    c.execute("SELECT * FROM payment_method")
-    for row in c:
-        print(row)
-    c.close()
+    # c.execute("SELECT * FROM DRIVER")
+    # for row in c:
+    #     print(row)
+    # c.execute("SELECT * FROM CUSTOMER")
+    # for row in c:
+    #     print(row)
+    # c.execute("SELECT * FROM doordash_order")
+    # for row in c:
+    #     print(row)
+    # c.execute("SELECT * FROM vehicle")
+    # for row in c:
+    #     print(row)
+    # c.execute("SELECT * FROM business")
+    # for row in c:
+    #     print(row)
+    # c.execute("SELECT * FROM driver_payment")
+    # for row in c:
+    #     print(row)
+    # c.execute("SELECT * FROM menu")
+    # for row in c:
+    #     print(row)
+    # c.execute("SELECT * FROM menu_item")
+    # for row in c:
+    #     print(row)
+    # c.execute("SELECT * FROM ordered_item")
+    # for row in c:
+    #     print(row)
+    # c.execute("SELECT * FROM payment")
+    # for row in c:
+    #     print(row)
+    # c.execute("SELECT * FROM payment_method")
+    # for row in c:
+    #     print(row)
+    # c.close()
 
 
 app = Flask(__name__)

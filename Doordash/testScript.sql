@@ -250,7 +250,7 @@ INSERT INTO menu_item (Menu_Item_ID, Menu_ID, Name, Cost)
 VALUES (50000, 45000, "McChicken", 1.00);
 
 INSERT INTO doordash_order (Order_ID, Driver_SSN, Customer_ID, Payment_ID)
-VALUES (Order_ID, 234742743, 15000, 30000);
+VALUES (35000, 234742743, 15000, 30000);
 
 INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity)
 VALUES (50000, 35000, 2);

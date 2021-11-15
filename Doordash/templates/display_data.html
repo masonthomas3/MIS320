@@ -1,0 +1,12 @@
+{%extends "layout.html"%}
+{%block content%}
+  <h1>All {{field}}!</h1>
+  <p>{{header_row}}</p>
+<table>
+  {% for row in all_rows %}
+  <tr>
+    <td> {{row}} </td>
+  </tr>
+  {% endfor %}
+</table>
+{%endblock%}

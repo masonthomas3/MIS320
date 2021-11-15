@@ -134,7 +134,7 @@ INSERT INTO payment (Payment_ID, Payment_Method_ID, Amount, Date)
 VALUES (8762384953, 8982123841, 13.50, "11-Nov-2021");
 
 INSERT INTO vehicle (Driver_SSN, Make, License_Plate, Model)
-VALUES (234742743, "Honda", "B4S KM9", "CRV");
+VALUES (234742743, "Honda", "B4SKM9", "CRV");
 
 INSERT INTO menu_item (Menu_Item_ID, Menu_ID, Name, Cost)
 VALUES (2341234324, 2347134101, "McChicken", 1.00);

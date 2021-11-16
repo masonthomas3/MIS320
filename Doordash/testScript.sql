@@ -137,33 +137,32 @@ INSERT INTO customer (Name, Phone_Number, Email, Address)
 VALUES ("Patrick Jordan", "8417823911", "pjordan@uiowa.edu", "9201 50th St. Iowa City, IA");
 
 
+INSERT INTO driver (Driver_SSN, Name, Age, Acceptance_Rate, Completion_Rate, On_Time_Rate, Customer_Rating, Lifetime_Deliveries)
+VALUES (234742743, 'Ryan Lawrence', 23, 78.5, 92, 62, 5, 140 );
 
-INSERT INTO driver (Driver_SSN, Name, Age)
-VALUES (234742743, "Ryan Lawrence", 23);
+INSERT INTO driver (Driver_SSN, Name, Age, Acceptance_Rate, Completion_Rate, On_Time_Rate, Customer_Rating, Lifetime_Deliveries)
+VALUES (209372747, 'Patrick Carter', 23, 90.3, 98, 84, 3.2, 100);
 
-INSERT INTO driver (Driver_SSN, Name, Age)
-VALUES (209372747, "Patrick Carter", 23);
+INSERT INTO driver (Driver_SSN, Name, Age, Acceptance_Rate, Completion_Rate, On_Time_Rate, Customer_Rating, Lifetime_Deliveries)
+VALUES (982735476, 'Michael Brady', 45,75.9, 87, 97, 4.2, 203);
 
-INSERT INTO driver (Driver_SSN, Name, Age)
-VALUES (982735476, "Michael Brady", 45);
+INSERT INTO driver (Driver_SSN, Name, Age, Acceptance_Rate, Completion_Rate, On_Time_Rate, Customer_Rating, Lifetime_Deliveries)
+VALUES (453728938, 'Jon Reid', 39, 60, 99, 62, 4.4, 34 );
 
-INSERT INTO driver (Driver_SSN, Name, Age)
-VALUES (453728938, "Jon Reid", 39);
+INSERT INTO driver (Driver_SSN, Name, Age, Acceptance_Rate, Completion_Rate, On_Time_Rate, Customer_Rating, Lifetime_Deliveries)
+VALUES (837263748, 'Hailee Gustafson', 18, 79, 92, 94, 3.5, 134);
 
-INSERT INTO driver (Driver_SSN, Name, Age)
-VALUES (837263748, "Hailee Gustafson", 18);
+INSERT INTO driver (Driver_SSN, Name, Age, Acceptance_Rate, Completion_Rate, On_Time_Rate, Customer_Rating, Lifetime_Deliveries)
+VALUES (872635419, 'Teresa Jones', 42, 89.5, 92.2, 79.1, 2.3, 256);
 
-INSERT INTO driver (Driver_SSN, Name, Age)
-VALUES (872635419, "Teresa Jones", 42);
+INSERT INTO driver (Driver_SSN, Name, Age, Acceptance_Rate, Completion_Rate, On_Time_Rate, Customer_Rating, Lifetime_Deliveries)
+VALUES (871627384, 'Theresa Judon', 27, 80.9, 97, 89.4, 1.1, 89);
 
-INSERT INTO driver (Driver_SSN, Name, Age)
-VALUES (871627384, "Theresa Judon", 27);
+INSERT INTO driver (Driver_SSN, Name, Age, Acceptance_Rate, Completion_Rate, On_Time_Rate, Customer_Rating, Lifetime_Deliveries)
+VALUES (653819732, 'Marcus Gilmore', 22,  69.2, 80.9, 65.7, 4.6, 101);
 
-INSERT INTO driver (Driver_SSN, Name, Age)
-VALUES (653819732, "Marcus Gilmore", 22);
-
-INSERT INTO driver (Driver_SSN, Name, Age)
-VALUES (281374921, "Reed Selby", 57);
+INSERT INTO driver (Driver_SSN, Name, Age,Acceptance_Rate, Completion_Rate, On_Time_Rate, Customer_Rating, Lifetime_Deliveries)
+VALUES (281374921, 'Reed Selby', 57, 70.6, 93, 89.9, 3.1, 145);
 
 
 

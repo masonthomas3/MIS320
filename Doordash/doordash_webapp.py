@@ -525,7 +525,7 @@ def add_ordered_item_page():
 
 @app.route('/display_ordered_items', methods=['GET'])
 def display_ordered_items_page():
-    header_row = "Ordered Item ID, Menu Item ID, Order ID, Quantity"
+    header_row = "Menu Item ID, Order ID, Quantity"
 
     sqlite_file = 'doordash_db.sqlite'
     conn = sqlite3.connect(sqlite_file)
@@ -535,6 +535,118 @@ def display_ordered_items_page():
     all_rows = c.fetchall()
 
     return render_template("display_data.html", field="Ordered Items", header_row=header_row, all_rows=all_rows)
+
+
+@app.route('/display_customer_driver_name', methods=['GET'])
+def display_customer_driver_name_page():
+    header_row = "Driver Name, Customer Name, Order ID"
+
+    sqlite_file = 'doordash_db.sqlite'
+    conn = sqlite3.connect(sqlite_file)
+    c = conn.cursor()
+
+    c.execute('SELECT d.Name as Driver, c.Name as Customer, o.Order_ID ' +
+              'FROM doordash_order o ' +
+              'INNER JOIN driver d ' +
+              'ON d.Driver_SSN = o.Driver_SSN ' +
+              'INNER JOIN customer c ' +
+              'ON c.Customer_ID = o.Customer_ID')
+    all_rows = c.fetchall()
+
+    return render_template("display_data.html", field="Driver, Customer Names with Order ID",
+                           header_row=header_row, all_rows=all_rows)
+
+
+@app.route('/display_order_details', methods=['GET'])
+def display_order_details():
+    header_row = "Menu Item Name, Menu Item Cost, Order ID, Quantity"
+
+    sqlite_file = 'doordash_db.sqlite'
+    conn = sqlite3.connect(sqlite_file)
+    c = conn.cursor()
+
+    c.execute('SELECT mi.Name as Menu_Item, mi.Cost, oi.Order_ID, oi.Quantity ' +
+              'FROM menu_item mi ' +
+              'INNER JOIN ordered_item oi ' +
+              'ON mi.Menu_Item_ID = oi.Menu_Item_ID')
+    all_rows = c.fetchall()
+
+    return render_template("display_data.html", field="Order Details",
+                           header_row=header_row, all_rows=all_rows)
+
+
+@app.route('/display_business_menus', methods=['GET'])
+def display_business_menus():
+    header_row = "Business, Menu, Menu Item, Item Cost"
+
+    sqlite_file = 'doordash_db.sqlite'
+    conn = sqlite3.connect(sqlite_file)
+    c = conn.cursor()
+
+    c.execute('SELECT b.Name as Business, m.Name as Menu, mi.Name as Menu_Item, mi.Cost ' +
+              'FROM business b ' +
+              'INNER JOIN menu m ' +
+              'ON b.Business_ID = m.Business_ID ' +
+              'INNER JOIN menu_item mi ' +
+              'ON m.Menu_ID = mi.Menu_ID')
+    all_rows = c.fetchall()
+
+    return render_template("display_data.html", field="Business Menus",
+                           header_row=header_row, all_rows=all_rows)
+
+
+@app.route('/display_tips_given', methods=['GET'])
+def display_tips_given():
+    header_row = "Customer Name, Driver Name, Tip"
+
+    sqlite_file = 'doordash_db.sqlite'
+    conn = sqlite3.connect(sqlite_file)
+    c = conn.cursor()
+
+    c.execute('select c.Name as Customer, d.Name as Driver, dp.Tip '
+              'from doordash_order o '
+              'inner join payment p '
+              'on o.Payment_ID = p.Payment_ID '
+              'inner join payment_method pm '
+              'on p.Payment_Method_ID = pm.Payment_Method_ID '
+              'inner join customer c '
+              'on pm.Customer_ID = c.Customer_ID '
+              'inner join driver_payment dp '
+              'on o.Driver_SSN = dp.Driver_SSN and o.Order_ID = dp.Order_ID '
+              'inner join driver d on dp.Driver_SSN = d.Driver_SSN')
+    all_rows = c.fetchall()
+
+    return render_template("display_data.html", field="Customer Tips",
+                           header_row=header_row, all_rows=all_rows)
+
+
+@app.route('/display_customer_driver_payments', methods=['GET'])
+def display_customer_driver_payments():
+    header_row = "Order ID, Payment Date, Customer, Customer Payment, Driver, Base_Pay, Tip"
+
+    sqlite_file = 'doordash_db.sqlite'
+    conn = sqlite3.connect(sqlite_file)
+    c = conn.cursor()
+
+    c.execute('SELECT o.order_id, p.Payment_Date, c.Name as Customer, p.Amount as Customer_Payment, '
+              'd.Name as Driver, dp.Base_Pay, dp.Tip '
+              'FROM doordash_order o '
+              'INNER JOIN payment p '
+              'ON o.Payment_ID = p.Payment_ID '
+              'INNER JOIN payment_method pm '
+              'ON p.Payment_Method_ID = pm.Payment_Method_ID '
+              'INNER JOIN customer c '
+              'ON pm.Customer_ID = c.Customer_ID '
+              'INNER JOIN driver_payment dp '
+              'ON o.Driver_SSN = dp.Driver_SSN AND o.Order_ID = dp.Order_ID '
+              'INNER JOIN driver d '
+              'ON dp.Driver_SSN = d.Driver_SSN '
+              'GROUP BY o.order_id, p.payment_date, c.name, p.amount, d.name, dp.base_pay, dp.tip '
+              'ORDER BY o.order_id')
+    all_rows = c.fetchall()
+
+    return render_template("display_data.html", field="Customer/Driver Payments",
+                           header_row=header_row, all_rows=all_rows)
 
 
 if __name__ == "__main__":

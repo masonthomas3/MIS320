@@ -341,7 +341,7 @@ VALUES (25010, 22.22, "04-Oct-2021");
 INSERT INTO payment (Payment_Method_ID, Amount, Payment_Date)
 VALUES (25010, 19.87, "04-Nov-2021");
 
-INSERT INTO vehicle (Vehicle_ID, Driver_SSN, Make, License_Plate, Model)
+INSERT INTO vehicle (Vehicle_ID, Driver_SSN, Make, Model, License_Plate)
 VALUES (15000, 234742743, "Honda", "CRV", "B4SKM9");
 
 INSERT INTO vehicle (Driver_SSN, Make, Model, License_Plate)

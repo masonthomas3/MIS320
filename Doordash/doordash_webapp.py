@@ -12,40 +12,7 @@ def set_up_database():
 
     # Inserts all tables used in database
     c.executescript(sql_script)
-    # c.execute("SELECT * FROM DRIVER")
-    # for row in c:
-    #     print(row)
-    # c.execute("SELECT * FROM CUSTOMER")
-    # for row in c:
-    #     print(row)
-    # c.execute("SELECT * FROM doordash_order")
-    # for row in c:
-    #     print(row)
-    # c.execute("SELECT * FROM vehicle")
-    # for row in c:
-    #     print(row)
-    # c.execute("SELECT * FROM business")
-    # for row in c:
-    #     print(row)
-    # c.execute("SELECT * FROM driver_payment")
-    # for row in c:
-    #     print(row)
-    # c.execute("SELECT * FROM menu")
-    # for row in c:
-    #     print(row)
-    # c.execute("SELECT * FROM menu_item")
-    # for row in c:
-    #     print(row)
-    # c.execute("SELECT * FROM ordered_item")
-    # for row in c:
-    #     print(row)
-    # c.execute("SELECT * FROM payment")
-    # for row in c:
-    #     print(row)
-    # c.execute("SELECT * FROM payment_method")
-    # for row in c:
-    #     print(row)
-    # c.close()
+    c.close()
 
 
 app = Flask(__name__)
@@ -78,7 +45,7 @@ def add_vehicle():
             c.execute('INSERT INTO VEHICLE (Driver_SSN, Make, License_Plate, Model) '
                       'VALUES (?,?,?,?)', (driver_ssn, make, license_plate, model))
             c.execute('COMMIT')
-            c.execute('SELECT * FROM vehicle')
+            c.close()
             return render_template("data_added.html", field="Vehicle")
     return render_template("data_invalid.html", field="Vehicle")
 
@@ -99,6 +66,7 @@ def display_vehicles_page():
     c.execute('SELECT * FROM vehicle')
     all_rows = c.fetchall()
 
+    c.close()
     return render_template("display_data.html", field="Vehicles", header_row=header_row, all_rows=all_rows)
 
 
@@ -116,9 +84,7 @@ def add_driver():
         c.execute('INSERT INTO driver (Driver_SSN, Name, Age) '
                   'VALUES (?,?,?)', (driver_ssn, name, age))
         c.execute('COMMIT')
-        c.execute('SELECT * FROM driver')
-        for row in c:
-            print(row)
+        c.close()
         return render_template("data_added.html", field="Driver")
     return render_template("data_invalid.html", field="Driver")
 
@@ -138,6 +104,7 @@ def display_drivers_page():
 
     c.execute('SELECT * FROM driver')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Drivers", header_row=header_row, all_rows=all_rows)
 
@@ -153,13 +120,11 @@ def add_customer():
     email = request.form['email']
     address = request.form['address']
 
-    if customer_name.isalpha() and phone_number.isnumeric():
+    if customer_name.isalpha() and phone_number.isnumeric() and len(email) <= 30 and len(address) <= 50:
         c.execute('INSERT INTO customer (Customer_Name, Phone_Number, Email, Address) '
                   'VALUES (?,?,?,?)', (customer_name, phone_number, email, address))
         c.execute('COMMIT')
-        c.execute('SELECT * FROM customer')
-        for row in c:
-            print(row)
+        c.close()
         return render_template("data_added.html", field="Customer")
     return render_template("data_invalid.html", field="Customer")
 
@@ -179,6 +144,7 @@ def display_customers_page():
 
     c.execute('SELECT * FROM customer')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Customers", header_row=header_row, all_rows=all_rows)
 
@@ -202,9 +168,7 @@ def add_payment_method():
             c.execute('INSERT INTO payment_method (Customer_ID, Card_Number, Expiration_Date, Security_Number) '
                       'VALUES (?,?,?,?)', (customer_id, card_number, expiration_date, security_number))
             c.execute('COMMIT')
-            c.execute('SELECT * FROM payment_method')
-            for row in c:
-                print(row)
+            c.close()
             return render_template("data_added.html", field="Payment Method")
     return render_template("data_invalid.html", field="Payment Method")
 
@@ -224,6 +188,7 @@ def display_payment_methods_page():
 
     c.execute('SELECT * FROM payment_method')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Payment Methods", header_row=header_row, all_rows=all_rows)
 
@@ -241,13 +206,11 @@ def add_payment():
     c.execute('SELECT payment_method_id FROM payment_method where payment_method_id = {pk}'.format(pk=payment_method_id))
     row = c.fetchone()
     if row is not None:
-        if payment_method_id.isnumeric() and amount.isnumeric() and len(date) == 10:
+        if payment_method_id.isnumeric() and amount.isnumeric() and len(date) == 11:
             c.execute('INSERT INTO payment (Payment_Method_ID, Amount, Date) '
                       'VALUES (?,?,?)', (payment_method_id, amount, date))
             c.execute('COMMIT')
-            c.execute('SELECT * FROM payment')
-            for row in c:
-                print(row)
+            c.close()
             return render_template("data_added.html", field="Payment")
     return render_template("data_invalid.html", field="Payment")
 
@@ -267,6 +230,7 @@ def display_payments_page():
 
     c.execute('SELECT * FROM payment')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Payments", header_row=header_row, all_rows=all_rows)
 
@@ -293,9 +257,7 @@ def add_order():
             c.execute('INSERT INTO doordash_order (Driver_SSN, Customer_ID, Payment_ID) '
                       'VALUES (?,?,?)', (driver_ssn, customer_id, payment_id))
             c.execute('COMMIT')
-            c.execute('SELECT * FROM doordash_order')
-            for row in c:
-                print(row)
+            c.close()
             return render_template("data_added.html", field="Order")
     return render_template("data_invalid.html", field="Order")
 
@@ -315,6 +277,7 @@ def display_orders_page():
 
     c.execute('SELECT * FROM doordash_order')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Orders", header_row=header_row, all_rows=all_rows)
 
@@ -342,9 +305,7 @@ def add_driver_payment():
             c.execute('INSERT INTO driver_payment (Driver_SSN, Order_ID, Base_Pay, Tip) '
                       'VALUES (?,?,?, ?)', (driver_ssn, order_id, base_pay, tip))
             c.execute('COMMIT')
-            c.execute('SELECT * FROM driver_payment')
-            for row in c:
-                print(row)
+            c.close()
             return render_template("data_added.html", field="Driver Payment")
     return render_template("data_invalid.html", field="Driver Payment")
 
@@ -364,6 +325,7 @@ def display_driver_payments_page():
 
     c.execute('SELECT * FROM driver_payment')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Driver Payments", header_row=header_row, all_rows=all_rows)
 
@@ -378,13 +340,11 @@ def add_business():
     location = request.form['location']
     delivery_fee = request.form['delivery_fee']
 
-    if name.isalpha() and delivery_fee.isnumeric():
+    if name.isalpha() and delivery_fee.isnumeric() and len(location) <= 50:
         c.execute('INSERT INTO business (Name, Location, Delivery_Fee) '
                   'VALUES (?,?,?)', (name, location, delivery_fee))
         c.execute('COMMIT')
-        c.execute('SELECT * FROM business')
-        for row in c:
-            print(row)
+        c.close()
         return render_template("data_added.html", field="Business")
     return render_template("data_invalid.html", field="Business")
 
@@ -404,6 +364,7 @@ def display_businesses_page():
 
     c.execute('SELECT * FROM business')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Businesses", header_row=header_row, all_rows=all_rows)
 
@@ -421,13 +382,11 @@ def add_menu():
     c.execute('SELECT Business_ID FROM business WHERE Business_ID = {pk}'.format(pk=business_id))
     row = c.fetchone()
     if row is not None:
-        if business_id.isnumeric():
+        if business_id.isnumeric() and len(description) <= 60 and len(name) <= 30:
             c.execute('INSERT INTO menu (Business_ID, Description, Name) '
                       'VALUES (?,?,?)', (business_id, description, name))
             c.execute('COMMIT')
-            c.execute('SELECT * FROM menu')
-            for row in c:
-                print(row)
+            c.close()
             return render_template("data_added.html", field="Menu")
     return render_template("data_invalid.html", field="Menu")
 
@@ -447,6 +406,7 @@ def display_menus_page():
 
     c.execute('SELECT * FROM menu')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Menus", header_row=header_row, all_rows=all_rows)
 
@@ -468,9 +428,7 @@ def add_menu_item():
             c.execute('INSERT INTO menu_item (Menu_ID, Name, Cost) '
                       'VALUES (?,?,?)', (menu_id, name, cost))
             c.execute('COMMIT')
-            c.execute('SELECT * FROM menu_item')
-            for row in c:
-                print(row)
+            c.close()
             return render_template("data_added.html", field="Menu Item")
     return render_template("data_invalid.html", field="Menu Item")
 
@@ -490,6 +448,7 @@ def display_menu_items_page():
 
     c.execute('SELECT * FROM menu_item')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Menu Items", header_row=header_row, all_rows=all_rows)
 
@@ -507,13 +466,11 @@ def add_ordered_item():
     c.execute('SELECT Menu_Item_ID FROM menu_item WHERE Menu_Item_ID = {pk}'.format(pk=menu_item_id))
     row = c.fetchone()
     if row is not None:
-        if menu_item_id.isnumeric() and order_id.isnumeric() and quantity.isnumeric():
+        if menu_item_id.isnumeric() and order_id.isnumeric() and quantity.isnumeric() and len(quantity) < 3:
             c.execute('INSERT INTO ordered_item (Menu_Item_ID, Order_ID, Quantity) '
                       'VALUES (?,?,?)', (menu_item_id, order_id, quantity))
             c.execute('COMMIT')
-            c.execute('SELECT * FROM ordered_item')
-            for row in c:
-                print(row)
+            c.close()
             return render_template("data_added.html", field="Ordered Item")
     return render_template("data_invalid.html", field="Ordered Item")
 
@@ -533,6 +490,7 @@ def display_ordered_items_page():
 
     c.execute('SELECT * FROM ordered_item')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Ordered Items", header_row=header_row, all_rows=all_rows)
 
@@ -552,6 +510,7 @@ def display_customer_driver_name_page():
               'INNER JOIN customer c ' +
               'ON c.Customer_ID = o.Customer_ID')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Driver, Customer Names with Order ID",
                            header_row=header_row, all_rows=all_rows)
@@ -570,6 +529,7 @@ def display_order_details():
               'INNER JOIN ordered_item oi ' +
               'ON mi.Menu_Item_ID = oi.Menu_Item_ID')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Order Details",
                            header_row=header_row, all_rows=all_rows)
@@ -590,6 +550,7 @@ def display_business_menus():
               'INNER JOIN menu_item mi ' +
               'ON m.Menu_ID = mi.Menu_ID')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Business Menus",
                            header_row=header_row, all_rows=all_rows)
@@ -615,6 +576,7 @@ def display_tips_given():
               'ON o.Driver_SSN = dp.Driver_SSN AND o.Order_ID = dp.Order_ID '
               'INNER JOIN driver d on dp.Driver_SSN = d.Driver_SSN')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Customer Tips",
                            header_row=header_row, all_rows=all_rows)
@@ -634,6 +596,7 @@ def display_iowa_city_orders():
               'ON o.Customer_ID = c.Customer_ID '
               'WHERE c.Address LIKE \'%Iowa City%\'')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Iowa City Orders",
                            header_row=header_row, all_rows=all_rows)
@@ -663,6 +626,7 @@ def display_customer_driver_payments():
               'GROUP BY o.order_id, p.payment_date, c.name, p.amount, d.name, dp.base_pay, dp.tip '
               'ORDER BY o.order_id')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Customer/Driver Payments",
                            header_row=header_row, all_rows=all_rows)
@@ -681,6 +645,7 @@ def display_driver_vehicles():
               'INNER JOIN vehicle v '
               'ON d.Driver_SSN = v.Driver_SSN')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Driver Vehicles",
                            header_row=header_row, all_rows=all_rows)
@@ -697,6 +662,7 @@ def display_driver_ratings():
     c.execute('SELECT Name, Acceptance_Rate, Completion_Rate, On_Time_Rate, Customer_Rating, Lifetime_Deliveries '
               'FROM driver')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Driver Ratings",
                            header_row=header_row, all_rows=all_rows)
@@ -723,6 +689,7 @@ def display_business_orders():
               'GROUP BY o.Order_ID, b.Name, b.Location, b.Delivery_Fee '
               'ORDER BY o.Order_ID')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Business Orders",
                            header_row=header_row, all_rows=all_rows)
@@ -745,6 +712,7 @@ def display_amount_paid():
               'GROUP BY c.Name, pm.Payment_Method_ID '
               'ORDER BY pm.Payment_Method_ID')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Customer's Total Amount Paid",
                            header_row=header_row, all_rows=all_rows)
@@ -765,6 +733,7 @@ def display_driver_total_compensation():
               'GROUP BY d.Name '
               'ORDER BY Total_Payment desc')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Driver's Total Compensation",
                            header_row=header_row, all_rows=all_rows)
@@ -792,6 +761,7 @@ def display_customer_order_locations():
               'ON m.Business_ID = b.Business_ID '
               'ORDER BY o.Order_ID')
     all_rows = c.fetchall()
+    c.close()
 
     return render_template("display_data.html", field="Customer Order Locations",
                            header_row=header_row, all_rows=all_rows)

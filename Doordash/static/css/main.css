@@ -14,7 +14,7 @@ body {
    margin: auto;
    padding: 5px;
    color: #dddddd;
-   background-color: #faf0f0;
+   background-color: #f2e9e9;
    font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -34,7 +34,7 @@ h1.logo {
 div.header {
   height: 100px;
   width:90%;
-  background-color:#dfb887;
+  background-color:#ff7575;
   margin:  auto;
   border: 2px solid #9b8554;
   border-radius: 0px 50px 5px 0px;
@@ -50,7 +50,7 @@ div.container  {
 div.footer {
   height: 30px;
   width: 90%;
-  background-color:#dfb887;
+  background-color:#ff7575;
   margin: 0 auto;
   border:2px solid #9b8554;
   border-radius: 3px 3px 50px 3px;
